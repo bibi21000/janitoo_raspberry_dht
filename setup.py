@@ -63,7 +63,7 @@ janitoo_entry_points = {
 }
 
 setup(
-    name = 'janitoo_raspberry_i2c_dht',
+    name = 'janitoo_raspberry_dht',
     description = "A server which handle many controller (hardware, onewire, i2c, ...) dedicated to the raspberry",
     long_description = "A server which handle many controller (hardware, onewire, i2c, ...) dedicated to the raspberry",
     author='Sébastien GALLET aka bibi2100 <bibi21000@gmail.com>',
@@ -89,20 +89,15 @@ setup(
     zip_safe = False,
     packages = find_packages('src', exclude=["scripts", "docs", "config"]),
     package_dir = { '': 'src' },
-    keywords = "raspberry",
+    keywords = "raspberry, sensor",
     include_package_data=True,
     data_files = data_files,
     install_requires=[
                      'janitoo',
-                     'janitoo_raspberry_i2c',
-                     #~ 'janitoo_buses == %s'%janitoo_version,
-                     'Adafruit-GPIO',
                      'Adafruit_DHT',
                     ],
     dependency_links = [
       'https://github.com/bibi21000/janitoo/archive/master.zip#egg=janitoo',
-      'https://github.com/bibi21000/janitoo_raspberry_i2c/archive/master.zip#egg=janitoo_raspberry_i2c',
-      'https://github.com/adafruit/Adafruit_Python_GPIO/archive/master.zip#egg=Adafruit-GPIO',
       'https://github.com/adafruit/Adafruit_Python_DHT/archive/master.zip#egg=Adafruit_DHT',
     ],
     entry_points = janitoo_entry_points,

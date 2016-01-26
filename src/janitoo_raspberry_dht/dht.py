@@ -56,6 +56,9 @@ assert(COMMAND_DESC[COMMAND_DOC_RESOURCE] == 'COMMAND_DOC_RESOURCE')
 def make_dht(**kwargs):
     return DHTComponent(**kwargs)
 
+def make_dht_value(**kwargs):
+    return JNTValueIpPing(**kwargs)
+
 SENSORS = { '11': Adafruit_DHT.DHT11,
             '22': Adafruit_DHT.DHT22,
             '2302': Adafruit_DHT.AM2302 }
