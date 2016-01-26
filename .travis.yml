@@ -11,7 +11,7 @@ before_install:
   - make deps
 install:
   - make travis-deps
-  - python setup.py install
+  - python setup.py install --force-test
 # command to run tests
 script:
  - make tests
