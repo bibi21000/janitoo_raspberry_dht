@@ -124,7 +124,7 @@ install:
 	@echo "Installation of ${MODULENAME} finished."
 
 develop:
-	-${PYTHON_EXEC} setup.py develop --force-test
+	-${PYTHON_EXEC} setup.py --force-test develop
 	@echo
 	@echo "Installation for developpers of ${MODULENAME} finished."
 
