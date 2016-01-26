@@ -56,5 +56,5 @@ JNTTComponent.onlyRasperryTest()
 class TestDHTComponent(JNTTComponent, JNTTComponentCommon):
     """Test the component
     """
-    component_name = "rpii2c.dht"
+    component_name = "rpibasic.dht"
 

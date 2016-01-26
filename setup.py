@@ -58,7 +58,7 @@ data_files_config(data_files, 'docs','src/docs/','*')
 #It will be used to collect entries without installing the package
 janitoo_entry_points = {
     "janitoo.components": [
-        "rpii2c.dht = janitoo_raspberry_i2c_dht.dht:make_dht",
+        "rpibasic.dht = janitoo_raspberry_i2c_dht.dht:make_dht",
     ],
 }
 
