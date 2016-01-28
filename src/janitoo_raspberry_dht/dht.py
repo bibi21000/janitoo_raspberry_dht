@@ -37,7 +37,8 @@ from janitoo.utils import HADD
 from janitoo.node import JNTNode
 from janitoo.value import JNTValue
 from janitoo.component import JNTComponent
-from janitoo_raspberry_i2c.i2c_bus import I2CBus
+
+import Adafruit_DHT
 
 ##############################################################
 #Check that we are in sync with the official command classes
@@ -55,9 +56,6 @@ assert(COMMAND_DESC[COMMAND_DOC_RESOURCE] == 'COMMAND_DOC_RESOURCE')
 
 def make_dht(**kwargs):
     return DHTComponent(**kwargs)
-
-def make_dht_value(**kwargs):
-    return JNTValueIpPing(**kwargs)
 
 SENSORS = { '11': Adafruit_DHT.DHT11,
             '22': Adafruit_DHT.DHT22,
