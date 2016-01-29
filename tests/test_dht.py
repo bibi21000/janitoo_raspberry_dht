@@ -58,3 +58,17 @@ class TestDHTComponent(JNTTComponent, JNTTComponentCommon):
     """
     component_name = "rpibasic.dht"
 
+    def test_101_read_sensor(self):
+        self.onlyRasperryTest()
+        comp = self.factory[self.component_name](pin=1,sensor=11)
+        temp = comp.temperature(None,0)
+        self.assertTrue(temp is not None)
+        hum = comp.humidity(None,0)
+        self.assertTrue(thum is not None)
+
+    def test_102_read_sensor_bad(self):
+        comp = self.factory[self.component_name](pin=1,sensor=0)
+        temp = comp.temperature(None,0)
+        self.assertTrue(temp is None)
+        hum = comp.humidity(None,0)
+        self.assertTrue(hum is None)

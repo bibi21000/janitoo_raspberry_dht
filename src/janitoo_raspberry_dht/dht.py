@@ -57,9 +57,9 @@ assert(COMMAND_DESC[COMMAND_DOC_RESOURCE] == 'COMMAND_DOC_RESOURCE')
 def make_dht(**kwargs):
     return DHTComponent(**kwargs)
 
-SENSORS = { '11': Adafruit_DHT.DHT11,
-            '22': Adafruit_DHT.DHT22,
-            '2302': Adafruit_DHT.AM2302 }
+SENSORS = { 11: Adafruit_DHT.DHT11,
+            22: Adafruit_DHT.DHT22,
+            2302: Adafruit_DHT.AM2302 }
 
 class DHTComponent(JNTComponent):
     """ A generic component for gpio """
@@ -81,14 +81,14 @@ class DHTComponent(JNTComponent):
             node_uuid=self.uuid,
             help='The pin number on the board',
             label='Pin',
-            default=1,
+            default=kwargs.pop('pin', 1),
         )
         uuid="sensor"
         self.values[uuid] = self.value_factory['config_integer'](options=self.options, uuid=uuid,
             node_uuid=self.uuid,
             help='The sensor type : 11,22,2302',
             label='Type',
-            default=11,
+            default=kwargs.pop('sensor', 11),
         )
         uuid="temperature"
         self.values[uuid] = self.value_factory['sensor_temperature'](options=self.options, uuid=uuid,
@@ -111,21 +111,23 @@ class DHTComponent(JNTComponent):
         self.values[poll_value.uuid] = poll_value
 
     def temperature(self, node_uuid, index):
-        res = os.popen('vcgencmd measure_temp').readline()
         ret = None
         try:
-            ret = float(self.re_nondecimal.sub('', res))
-        except ValueError:
+            humidity, temperature = Adafruit_DHT.read_retry(SENSORS[self.values['sensor'].get_data_index(index=index)], self.values['pin'].get_data_index(index=index))
+            ret=temperature
+            self.values['temperature'].set_data_index(index=index, data=temperature)
+            self.values['humidity'].set_data_index(index=index, data=humidity)
+        except:
             logger.exception('Exception when retrieving temperature')
-            ret = None
         return ret
 
     def humidity(self, node_uuid, index):
-        res = os.popen('vcgencmd measure_temp').readline()
         ret = None
         try:
-            ret = float(self.re_nondecimal.sub('', res))
-        except ValueError:
-            logger.exception('Exception when retrieving humidity')
-            ret = None
+            humidity, temperature = Adafruit_DHT.read_retry(SENSORS[self.values['sensor'].get_data_index(index=index)], self.values['pin'].get_data_index(index=index))
+            ret=humidity
+            self.values['temperature'].set_data_index(index=index, data=temperature)
+            self.values['humidity'].set_data_index(index=index, data=humidity)
+        except:
+            logger.exception('Exception when retrieving temperature')
         return ret
