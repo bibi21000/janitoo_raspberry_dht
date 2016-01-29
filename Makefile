@@ -134,7 +134,7 @@ docker-deps:
 	@echo
 	@echo "Docker dependencies for ${MODULENAME} installed."
 
-travis-deps:
+travis-deps: docker-deps
 	sudo apt-get install -y python-pip
 	git clone https://github.com/bibi21000/janitoo_mosquitto.git
 	make -C janitoo_mosquitto deps
