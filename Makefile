@@ -128,6 +128,12 @@ develop:
 	@echo
 	@echo "Installation for developpers of ${MODULENAME} finished."
 
+docker-deps:
+	git clone https://github.com/adafruit/Adafruit_Python_DHT.git
+	cd Adafruit_Python_DHT && ${PYTHON_EXEC} setup.py develop --force-test
+	@echo
+	@echo "Docker dependencies for ${MODULENAME} installed."
+
 travis-deps:
 	sudo apt-get install -y python-pip
 	git clone https://github.com/bibi21000/janitoo_mosquitto.git
@@ -138,8 +144,6 @@ travis-deps:
 	for dir in src cache cache/janitoo_manager home log run etc init; do mkdir /opt/janitoo/$$dir; done
 	pip install git+git://github.com/bibi21000/janitoo_nosetests@master
 	pip install git+git://github.com/bibi21000/janitoo_nosetests_flask@master
-	git clone https://github.com/adafruit/Adafruit_Python_DHT.git
-	cd Adafruit_Python_DHT && ${PYTHON_EXEC} setup.py develop --force-test
 	pip install coveralls
 	@echo
 	@echo "Travis dependencies for ${MODULENAME} installed."
