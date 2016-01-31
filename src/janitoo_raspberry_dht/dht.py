@@ -118,7 +118,7 @@ class DHTComponent(JNTComponent):
             self.values['temperature'].set_data_index(index=index, data=temperature)
             self.values['humidity'].set_data_index(index=index, data=humidity)
         except:
-            logger.exception('Exception when retrieving temperature')
+            logger.exception('Exception when retrieving temperature : %s, %s'%(node_uuid, index))
         return ret
 
     def humidity(self, node_uuid, index):
@@ -129,5 +129,5 @@ class DHTComponent(JNTComponent):
             self.values['temperature'].set_data_index(index=index, data=temperature)
             self.values['humidity'].set_data_index(index=index, data=humidity)
         except:
-            logger.exception('Exception when retrieving temperature')
+            logger.exception('Exception when retrieving humidity : %s, %s'%(node_uuid, index))
         return ret
