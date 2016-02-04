@@ -131,3 +131,11 @@ class DHTComponent(JNTComponent):
         except:
             logger.exception('Exception when retrieving humidity : %s, %s'%(node_uuid, index))
         return ret
+
+    def check_heartbeat(self):
+        """Check that the component is 'available'
+
+        """
+        if 'temperature' not in self.values:
+            return False
+        return self.values['temperature'].data is not None
