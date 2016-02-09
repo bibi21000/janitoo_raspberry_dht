@@ -138,5 +138,4 @@ class DHTComponent(JNTComponent):
         """
         if 'temperature' not in self.values:
             return False
-        print self.values['temperature'].data
         return self.values['temperature'].data is not None
