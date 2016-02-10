@@ -97,7 +97,7 @@ class DHTComponent(JNTComponent):
             label='Temp',
             get_data_cb=self.temperature,
         )
-        poll_value = self.values[uuid].create_poll_value()
+        poll_value = self.values[uuid].create_poll_value(default=300)
         self.values[poll_value.uuid] = poll_value
 
         uuid="humidity"
@@ -107,7 +107,7 @@ class DHTComponent(JNTComponent):
             label='Hum',
             get_data_cb=self.humidity,
         )
-        poll_value = self.values[uuid].create_poll_value()
+        poll_value = self.values[uuid].create_poll_value(default=300)
         self.values[poll_value.uuid] = poll_value
 
     def temperature(self, node_uuid, index):
