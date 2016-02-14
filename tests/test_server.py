@@ -67,7 +67,6 @@ class TestPiSerser(JNTTServer, JNTTServerCommon):
         try:
             self.assertHeartbeatNode(hadd=HADD%(223,0))
             self.assertHeartbeatNode(hadd=HADD%(223,1))
-            self.assertHeartbeatNode(hadd=HADD%(223,2))
         finally:
             self.stop()
 
