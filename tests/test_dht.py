@@ -52,7 +52,6 @@ class TestDHTComponent(JNTTComponent, JNTTComponentCommon):
     component_name = "rpibasic.dht"
 
     def test_101_read_sensor(self):
-        self.wipTest()
         self.onlyRasperryTest()
         comp = self.factory[self.component_name](pin=1,sensor=11)
         temp = comp.temperature(None,0)
