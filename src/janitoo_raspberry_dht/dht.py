@@ -109,28 +109,38 @@ class DHTComponent(JNTComponent):
         )
         poll_value = self.values[uuid].create_poll_value(default=300)
         self.values[poll_value.uuid] = poll_value
+        self._dht_lock =  threading.Lock()
+
+    def dht_read(self, sensor=11, pin=1):
+        ret = None,None
+        self._dht_lock.acquire()
+        try:
+            ret = Adafruit_DHT.read_retry(sensor, pin)
+            return ret
+        except:
+            logger.exception('[%s] - Exception when reading sensor : %s, %s', self.__class__.__name__, sensor, pin)
+        finally:
+            self._dht_lock.release()
+        return None,None
 
     def temperature(self, node_uuid, index):
-        ret = None
-        try:
-            humidity, temperature = Adafruit_DHT.read_retry(SENSORS[self.values['sensor'].get_data_index(index=index)], self.values['pin'].get_data_index(index=index))
-            ret=temperature
-            self.values['temperature'].set_data_index(index=index, data=temperature)
-            self.values['humidity'].set_data_index(index=index, data=humidity)
-        except:
-            logger.exception('Exception when retrieving temperature : %s, %s'%(node_uuid, index))
-        return ret
+        """ Retrieve temperature """
+        humidity, temperature = self.dht_read( \
+            SENSORS[self.values['sensor'].get_data_index(index=index)],
+            self.values['pin'].get_data_index(index=index)
+        )
+        self.values['temperature'].set_data_index(index=index, data=temperature)
+        return temperature
 
     def humidity(self, node_uuid, index):
-        ret = None
-        try:
-            humidity, temperature = Adafruit_DHT.read_retry(SENSORS[self.values['sensor'].get_data_index(index=index)], self.values['pin'].get_data_index(index=index))
-            ret=humidity
-            self.values['temperature'].set_data_index(index=index, data=temperature)
-            self.values['humidity'].set_data_index(index=index, data=humidity)
-        except:
-            logger.exception('Exception when retrieving humidity : %s, %s'%(node_uuid, index))
-        return ret
+        """ Retrieve humidity """
+        self.values['humidity'].set_data_index(index=index, data=None)
+        humidity, temperature = self.dht_read( \
+            SENSORS[self.values['sensor'].get_data_index(index=index)],
+            self.values['pin'].get_data_index(index=index)
+        )
+        self.values['humidity'].set_data_index(index=index, data=humidity)
+        return humidity
 
     def check_heartbeat(self):
         """Check that the component is 'available'

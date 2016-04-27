@@ -53,17 +53,17 @@ class TestDHTComponent(JNTTComponent, JNTTComponentCommon):
 
     def test_101_read_sensor(self):
         self.onlyRasperryTest()
-        comp = self.factory[self.component_name](pin=1,sensor=11)
-        temp = comp.temperature(None,0)
-        self.assertNotEqual(temp, None)
-        hum = comp.humidity(None,0)
-        self.assertNotEqual(hum, None)
+        comp = self.factory[self.component_name]()
+        self.assertNotEqual(comp, None)
+        humidity, temperature = comp.dht_read(pin=1,sensor=11)
+        self.assertNotEqual(temperature, None)
+        self.assertNotEqual(humidity, None)
         self.assertTrue(comp.check_heartbeat())
 
     def test_102_read_sensor_bad(self):
-        comp = self.factory[self.component_name](pin=1,sensor=0)
-        temp = comp.temperature(None,0)
-        self.assertEqual(temp, None)
-        hum = comp.humidity(None,0)
-        self.assertEqual(hum, None)
+        comp = self.factory[self.component_name]()
+        self.assertNotEqual(comp, None)
+        humidity, temperature = comp.dht_read(pin=255,sensor=11)
+        self.assertEqual(temperature, None)
+        self.assertEqual(humidity, None)
         self.assertFalse(comp.check_heartbeat())
