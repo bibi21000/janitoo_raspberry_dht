@@ -1,0 +1,22 @@
+janitoo_raspberry_dht package
+=============================
+
+Submodules
+----------
+
+janitoo_raspberry_dht.dht module
+--------------------------------
+
+.. automodule:: janitoo_raspberry_dht.dht
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: janitoo_raspberry_dht
+    :members:
+    :undoc-members:
+    :show-inheritance:

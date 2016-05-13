@@ -1,0 +1,13 @@
+janitoo_raspberry_dht package
+=============================
+
+Show janitoo's extensions.
+
+Core extensions
+---------------
+
+Components
+^^^^^^^^^^
+
+ - rpibasic.dht (janitoo_raspberry_dht.dht:make_dht)
+
