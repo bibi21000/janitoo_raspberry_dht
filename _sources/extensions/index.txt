@@ -1,13 +1,7 @@
-janitoo_raspberry_dht package
-=============================
+Janitoo's extensions
+====================
 
-Show janitoo's extensions.
+This package contains the following extensions for Janitoo.
 
-Core extensions
----------------
-
-Components
-^^^^^^^^^^
-
- - rpibasic.dht (janitoo_raspberry_dht.dht:make_dht)
+.. jnt-extensions::
 
