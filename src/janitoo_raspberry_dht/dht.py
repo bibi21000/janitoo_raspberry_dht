@@ -117,7 +117,7 @@ class DHTComponent(JNTComponent):
         try:
             ret = Adafruit_DHT.read_retry(sensor, pin)
             return ret
-        except:
+        except Exception:
             logger.exception('[%s] - Exception when reading sensor : %s, %s', self.__class__.__name__, sensor, pin)
         finally:
             self._dht_lock.release()
