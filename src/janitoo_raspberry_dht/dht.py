@@ -112,6 +112,7 @@ class DHTComponent(JNTComponent):
         self._dht_lock =  threading.Lock()
 
     def dht_read(self, sensor=11, pin=1):
+        """ Read sensor """
         ret = None,None
         self._dht_lock.acquire()
         try:
